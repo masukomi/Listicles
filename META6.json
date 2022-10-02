@@ -1,0 +1,27 @@
+{
+  "api": "1",
+  "auth": "zef:masukomi",
+  "authors": [
+    "masukomi <masukomi@masukomi.org>"
+  ],
+  "build-depends": [
+  ],
+  "depends": [
+  ],
+  "description": "Adds convenience methods to Array",
+  "license": "MIT",
+  "name": "Listicles",
+  "perl": "6.d",
+  "provides": {
+    "Listicles": "lib/Listicles.rakumod"
+  },
+  "resources": [
+  ],
+  "source-url": "",
+  "tags": [
+    "Array"
+  ],
+  "test-depends": [
+  ],
+  "version": "1.0.0"
+}

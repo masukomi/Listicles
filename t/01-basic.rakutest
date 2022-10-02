@@ -1,0 +1,46 @@
+use lib 'lib';
+use Test;
+use Listicles;
+
+my @test_array = [1,2,"4","hi", 3/4];
+
+# drop positive
+is( @test_array.drop(2), ["4","hi", 3/4] );
+# drop negative
+is( @test_array.drop(-2), [1,2,"4"] );
+# drop too much, but flexible
+is( [].drop(4), [] );
+# drop too much inflexible
+dies-ok({ @test_array.drop(20, all_or_nothing=>True) }, "should die if insuficient elements");
+ok(@test_array.drop(1).isa(Array));
+# includes
+is(@test_array.includes("4"), True);
+is(@test_array.includes(4), False);
+is(@test_array.includes(3/4), True);
+# NOTE: raku's handling of rationals may lead to unexpected results
+is(@test_array.includes(0.75), True);
+# includes ducktyped
+is(@test_array.includes(4, ducktyped=>True), True);
+# is-empty
+is(@test_array.is-empty(), False);
+is([].is-empty(), True);
+# split-by
+# note the "too-small" entry at th eend
+is(@test_array.split-by(2).raku, [[1,2],["4","hi"], [3/4]].raku);
+# split-by (perfectly)
+dies-ok({@test_array.split-by(2, only_perfect_splits=>True)}, "Should die if not evenly splittable");
+is([1,2,3,4].split-by(2, only_perfect_splits=>True), [[1,2],[3,4]]);
+# take positive
+is(@test_array.take(2), [1,2]);
+# take negative
+is(@test_array.take(-2), ["hi", 3/4]);
+# # take too much
+is(@test_array.take(20), @test_array);
+dies-ok({@test_array.take(20, :all_or_nothing=>True)}, "Should die if insufficent elements");
+# to-hash
+is(@test_array.to-hash(),  {0=>1, 1=>2, 2=>"4", 3=>"hi", 4=>3/4});
+# to-hash empty
+is([].to-hash(), {});
+
+
+done-testing;
