@@ -4,6 +4,13 @@ use Listicles;
 
 my @test_array = [1,2,"4","hi", 3/4];
 
+# car
+is( @test_array.car, 1 );
+dies-ok({[].car()}, "can't call car on empty arrays");
+# cdr
+is( @test_array.cdr, [2, "4","hi", 3/4] );
+is([1].cdr(), []);
+dies-ok({[].cdr()}, "can't call cdr on empty arrays");
 # drop positive
 is( @test_array.drop(2), ["4","hi", 3/4] );
 # drop negative
@@ -24,6 +31,10 @@ is(@test_array.includes(4, ducktyped=>True), True);
 # is-empty
 is(@test_array.is-empty(), False);
 is([].is-empty(), True);
+# rest
+is( @test_array.rest(), [2, "4","hi", 3/4] );
+is( [].rest(), [] );
+#
 # split-by
 # note the "too-small" entry at th eend
 is(@test_array.split-by(2).raku, [[1,2],["4","hi"], [3/4]].raku);

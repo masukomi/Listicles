@@ -1,5 +1,21 @@
 A collection of helper methods to make working with Arrays a little easier.
 
+### method car
+
+```raku
+method car() returns Mu
+```
+
+Returns the first element of the Array. Throws an exception if the array is empty. Intended to satisfy lisp people.
+
+### method cdr
+
+```raku
+method cdr() returns Array
+```
+
+Returns everything but the first element of the array. Throws an exception if the array is empty. Intended to satisfy lisp people.
+
 ### method drop
 
 ```raku
@@ -30,13 +46,21 @@ method is-empty() returns Bool
 
 Tests if the array is empty
 
+### method rest
+
+```raku
+method rest() returns Array
+```
+
+Returns a new array with everything but the first element. If the array is empty, or only has one element, it will return an empty array.
+
 ### method split-by
 
 ```raku
 method split-by(
     Int $size,
     Bool :$only_perfect_splits = Bool::False
-) returns Array
+) returns Array:D
 ```
 
 Splits a Array into an array of arrays of the specified length (or smaller). If the array is not evenly divisble then the last array will contain the remainder. If only_perfect_splits is set to True it will throw an exception if the Array is not evenly divisible by $size.

@@ -9,6 +9,23 @@ use MONKEY-TYPING;
 
 augment class Array {
 
+	#|( Returns the first element of the Array.
+	Throws an exception if the array is empty. Intended to satisfy lisp people.
+	)
+	method car(){
+		die("Array is empty") if self.is-empty();
+		self[0];
+	}
+
+	#|( Returns everything but the first element of the array.
+	Throws an exception if the array is empty.
+	Intended to satisfy lisp people.
+	)
+	method cdr() returns Array {
+		die("Array is empty") if self.is-empty();
+		self.drop(1);
+	}
+
 	#|( Returns a new list without the first or last $count elements of the array depending on if count is positive or negative.
 	)
 	method drop(Int $count, Bool :$all_or_nothing=False) returns Array:D {
@@ -58,12 +75,17 @@ augment class Array {
 		self.elems == 0;
     }
 
+	#| Returns a new array with everything but the first element. If the array is empty, or only has one element, it will return an empty array.
+	method rest() returns Array {
+		self.drop(1);
+	}
+
 	#|( Splits a Array into an array of arrays of the specified length (or smaller).
 	If the array is not evenly divisble then the last array will contain the remainder.
 	If only_perfect_splits is set to True it will throw an exception if the Array is not
 	evenly divisible by $size.
 	)
-	method split-by(Int $size, Bool :$only_perfect_splits=False) returns Array {
+	method split-by(Int $size, Bool :$only_perfect_splits=False) returns Array:D {
 		if $only_perfect_splits and ! (self.elems %% $size) {
 			die("Array with " ~ self.elems ~ " elements isn't evenly divisible by $size");
 		}
