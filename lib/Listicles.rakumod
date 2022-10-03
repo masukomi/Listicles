@@ -1,4 +1,4 @@
-unit module Listicles:ver<1.0.0>:auth<masukomi (masukomi@masukomi.org)>;
+unit module Listicles:ver<1.1.0>:auth<masukomi (masukomi@masukomi.org)>;
 
 =begin pod
 A collection of helper methods to make working with Arrays a little easier.
