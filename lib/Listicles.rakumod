@@ -1,25 +1,17 @@
 unit module Listicles:ver<1.0.0>:auth<masukomi (masukomi@masukomi.org)>;
 
+=begin pod
+A collection of helper methods to make working with Arrays a little easier.
+
+=end pod
+
 use MONKEY-TYPING;
 
 augment class Array {
 
-	#|( Returns a new list without the first or last $count elements of the array depending
-	# on if $count is positive or negative.
-	# =head2 Parameters
-	# * C<$count> - the number of elements to take from the beginning if positive,
-	#   or from the end if negative.
-	# * C<:$all_or_nothing> - Bool set this to True
-	#   if you want it to throw an exception if there are insufficent elements available.
-	# =head2 Returns
-	# A new array containing the specified elements
+	#|( Returns a new list without the first or last $count elements of the array depending on if count is positive or negative.
 	)
 	method drop(Int $count, Bool :$all_or_nothing=False) returns Array:D {
-		 # my $range = $count > 0
-		 # 			  ?? (($count - 1)..(self.elems - 1))
-		 # 			  !! ((self.elems - $count - 1)..(self.elems - 1));
-		 # self[$range].Array;
-
 
 		 if $all_or_nothing {
 			my $invalid = $count > 0
@@ -43,11 +35,8 @@ augment class Array {
 	}
 
 
-	#|( Tests if the array includes the item passed in
-	# =head2 Parameters
-	# * C<$x> the item you're looking for
-	# * C<:$ducktyped> Boolean indicating if ducktyped matches are acceptable.
-	#   Defaults to False.
+	#|( Tests if the array includes the item passed in.
+	 Set ducktyped to True for ducktyped matches
 	)
 	method includes(Any $x, Bool :$ducktyped = False) returns Bool:D {
 		return False if self.is-empty();
@@ -69,12 +58,10 @@ augment class Array {
     }
 
 	#|( Splits a Array into an array of arrays of the specified length (or smaller).
-	#If the array is not evenly divisble then the last array will contain the remainder
-	# =head2 Parameters
-	# * C<$size> the size of the sublists to return.
-	# * C<:$only_perfect_splits> Boolean. Set this to true if you want it to throw
-	#   an exception for lists that aren't evenly divisible by C<$size>
-	#)
+	If the array is not evenly divisble then the last array will contain the remainder.
+	If only_perfect_splits is set to True it will throw an exception if the Array is not
+	evenly divisible by $size.
+	)
 	method split-by(Int $size, Bool :$only_perfect_splits=False) returns Array {
 		if $only_perfect_splits and ! (self.elems %% $size) {
 			die("Array with " ~ self.elems ~ " elements isn't evenly divisible by $size");
@@ -93,14 +80,9 @@ augment class Array {
 
 
 	#|( Take returns $count elements of the Array from the beginning
-	# or end depending on if $count is positive or negative.
-	# If there are fe
-	# =head2 Parameters
-	# * C<$count> - the number of elements to take
-	# * C<:$all_or_nothing> - Bool set this to True
-	#   if you want it to throw an exception if there are insufficent elements available.
-	# =head2 Returns
-	# A new array containing the specified elements
+	or end depending on if $count is positive or negative. If there are fewer elements
+	than $count it will return whatever is available. Set all_or_nothing to True
+	and it will throw an exception if there are insufficient elements.
 	)
 	method take(Int $count, Bool :$all_or_nothing=False) returns Array:D {
 		 if $all_or_nothing {
