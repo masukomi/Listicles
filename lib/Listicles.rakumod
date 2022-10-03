@@ -36,7 +36,8 @@ augment class Array {
 
 
 	#|( Tests if the array includes the item passed in.
-	 Set ducktyped to True for ducktyped matches
+	 Set ducktyped to True for ducktyped matches.
+	 For example "4" will match 4 with ducktyped matches.
 	)
 	method includes(Any $x, Bool :$ducktyped = False) returns Bool:D {
 		return False if self.is-empty();
@@ -104,7 +105,9 @@ augment class Array {
 		 ).Array
 	}
 
-	#| creates a hash with the stringified index of each element as its key
+	#|( creates a hash with the stringified index of each element as its key. Set one_based to True to have it start the keys at 1 instead of 0.
+	Example: ["foo", "bar"] -> {"0"=>"foo", "1"=>"bar"}
+	)
 	method to-hash(:$one_based=False) returns Hash:D {
 		return Hash.new() if self.is-empty();
 		my $range = (0..(self.elems - 1));

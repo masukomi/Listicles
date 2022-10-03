@@ -39,6 +39,8 @@ is(@test_array.take(20), @test_array);
 dies-ok({@test_array.take(20, :all_or_nothing=>True)}, "Should die if insufficent elements");
 # to-hash
 is(@test_array.to-hash(),  {0=>1, 1=>2, 2=>"4", 3=>"hi", 4=>3/4});
+# to-hash one_based
+is(@test_array.to-hash(one_based=>True),  {1=>1, 2=>2, 3=>"4", 4=>"hi", 5=>3/4});
 # to-hash empty
 is([].to-hash(), {});
 

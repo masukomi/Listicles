@@ -19,7 +19,9 @@
   ],
   "source-url": "https://github.com/masukomi/Listicles.git",
   "tags": [
-    "Array", "Helper", "Convenience"
+    "Array",
+    "Helper",
+    "Convenience"
   ],
   "test-depends": [
   ],

@@ -20,7 +20,7 @@ method includes(
 ) returns Bool
 ```
 
-Tests if the array includes the item passed in. Set ducktyped to True for ducktyped matches
+Tests if the array includes the item passed in. Set ducktyped to True for ducktyped matches. For example "4" will match 4 with ducktyped matches.
 
 ### method is-empty
 
@@ -60,5 +60,5 @@ method to-hash(
 ) returns Hash:D
 ```
 
-creates a hash with the stringified index of each element as its key
+creates a hash with the stringified index of each element as its key. Set one_based to True to have it start the keys at 1 instead of 0. Example: ["foo", "bar"] -> {"0"=>"foo", "1"=>"bar"}
 
