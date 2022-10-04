@@ -1,4 +1,4 @@
-unit module Listicles:ver<1.1.0>:auth<masukomi (masukomi@masukomi.org)>;
+unit module Listicles:ver<1.1.1>:auth<masukomi (masukomi@masukomi.org)>;
 
 =begin pod
 A collection of helper methods to make working with Arrays a little easier.
@@ -46,7 +46,7 @@ augment class Array {
 		 # we know it's a subset now.
 
 		 ($count > 0
-		  ?? self[($count - 1)^..*]
+		  ?? self.skip($count)
 		  !! self[0..(self.elems - $num_elements_needed - 1)]
 		 ).Array
 	}
@@ -77,7 +77,7 @@ augment class Array {
 
 	#| Returns a new array with everything but the first element. If the array is empty, or only has one element, it will return an empty array.
 	method rest() returns Array {
-		self.drop(1);
+		self.skip(1).Array;
 	}
 
 	#|( Splits a Array into an array of arrays of the specified length (or smaller).
@@ -90,15 +90,7 @@ augment class Array {
 			die("Array with " ~ self.elems ~ " elements isn't evenly divisible by $size");
 		}
 		return [] if self.is-empty();
-
-		my @result = [];
-		loop (my $index = 0; $index < self.elems; $index += $size ) {
-			my $end = $index + ($size - 1);
-			$end = self.elems - 1 if $end >= self.elems;
-
-			@result.push(self[$index..$end].Array);
-		}
-		return @result;
+		self.batch($size).map({.Array}).Array;
 	}
 
 
