@@ -1,4 +1,4 @@
-unit module Listicles:ver<1.1.1>:auth<masukomi (masukomi@masukomi.org)>;
+unit module Listicles:ver<1.2.0>:auth<masukomi (masukomi@masukomi.org)>;
 
 =begin pod
 A collection of helper methods to make working with Arrays a little easier.
@@ -51,6 +51,10 @@ augment class Array {
 		 ).Array
 	}
 
+	#| Fully, and deeply flattens a list, and returns it as a Seq (like flat).
+	method flatten returns Seq:D {
+		gather self.deepmap( *.take )
+	}
 
 	#|( Tests if the array includes the item passed in.
 	 Set ducktyped to True for ducktyped matches.

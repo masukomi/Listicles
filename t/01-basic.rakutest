@@ -2,8 +2,8 @@ use lib 'lib';
 use Test;
 use Listicles;
 
-my @test_array = [1,2,"4","hi", 3/4];
-
+my @test_array    = [1,2,"4","hi", 3/4];
+my @nested_arrays = [[1, 2], [3, 4], [5, [6, [7]]]];
 # car
 is( @test_array.car, 1 );
 dies-ok({[].car()}, "can't call car on empty arrays");
@@ -20,6 +20,9 @@ is( [].drop(4), [] );
 # drop too much inflexible
 dies-ok({ @test_array.drop(20, all_or_nothing=>True) }, "should die if insuficient elements");
 ok(@test_array.drop(1).isa(Array));
+# flatten
+is(@nested_arrays.flatten.elems, 7);
+ok(@nested_arrays.flatten.isa(Seq), ".flatten should return a Seq (like .flat)");
 # includes
 is(@test_array.includes("4"), True);
 is(@test_array.includes(4), False);

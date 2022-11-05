@@ -27,6 +27,14 @@ method drop(
 
 Returns a new list without the first or last $count elements of the array depending on if count is positive or negative.
 
+### method flatten
+
+```raku
+method flatten() returns Seq:D
+```
+
+Fully, and deeply flattens a list, and returns it as a Seq (like flat).
+
 ### method includes
 
 ```raku
