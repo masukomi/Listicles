@@ -2,8 +2,9 @@ use lib 'lib';
 use Test;
 use Listicles;
 
-my @test_array    = [1,2,"4","hi", 3/4];
-my @nested_arrays = [[1, 2], [3, 4], [5, [6, [7]]]];
+my @test_array     = [1,2,"4","hi", 3/4];
+my @array_with_nil = [1, Nil, 3];
+my @nested_arrays  = [[1, 2], [3, 4], [5, [6, [7]]]];
 # car
 is( @test_array.car, 1 );
 dies-ok({[].car()}, "can't call car on empty arrays");
@@ -24,13 +25,15 @@ ok(@test_array.drop(1).isa(Array));
 is(@nested_arrays.flatten.elems, 7);
 ok(@nested_arrays.flatten.isa(Seq), ".flatten should return a Seq (like .flat)");
 # includes
-is(@test_array.includes("4"), True);
-is(@test_array.includes(4), False);
-is(@test_array.includes(3/4), True);
+is(@test_array.includes(Nil), False, "should not find Nil");
+is(@array_with_nil.includes(Nil), True, "should find Nil");
+is(@test_array.includes("4"), True, "should find \"4\"");
+is(@test_array.includes(4), False, 'should NOT find 4');
+is(@test_array.includes(3/4), True, 'should find 3/4');
 # NOTE: raku's handling of rationals may lead to unexpected results
-is(@test_array.includes(0.75), True);
+is(@test_array.includes(0.75), True, 'should find 0.75');
 # includes ducktyped
-is(@test_array.includes(4, ducktyped=>True), True);
+is(@test_array.includes(4, ducktyped=>True), True, 'should find ducktyped 4');
 # is-empty
 is(@test_array.is-empty(), False);
 is([].is-empty(), True);

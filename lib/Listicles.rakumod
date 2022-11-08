@@ -62,14 +62,15 @@ augment class Array {
 	)
 	method includes(Any $x, Bool :$ducktyped = False) returns Bool:D {
 		return False if self.is-empty();
-		if ! $x.isa(Nil) {
+		if $x.defined {
 			my $y = self.first: * ~~ $x;
-			return False if $y.isa(Nil);
 			return (! $ducktyped) ?? $y.WHAT ~~ $x.WHAT !! True ;
 		} else {
-			loop (my $index = 0; $index < self.elems; $index++) {
-				return True if self[$index].isa(Nil);
-			}
+			return $x ~~ any self;
+			# loop (my $index = 0; $index < self.elems; $index++) {
+			# 	note("\nXXX self[$index]: " ~ self[$index].raku);
+			# 	return True if Nil ~~ self[$index];
+			# }
 		}
 		False;
 	}
