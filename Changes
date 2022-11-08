@@ -1,3 +1,7 @@
+## [1.2.1] - 2022-11-08
+### Fixed
+*  corrected bug in how includes handles Nil
+
 ## [1.2.0] - 2022-11-05
 ### Added
 *  added flatten method
