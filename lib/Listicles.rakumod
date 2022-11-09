@@ -1,4 +1,4 @@
-unit module Listicles:ver<1.2.1>:auth<masukomi (masukomi@masukomi.org)>;
+unit module Listicles:ver<1.3.0>:auth<masukomi (masukomi@masukomi.org)>;
 
 =begin pod
 A collection of helper methods to make working with Arrays a little easier.
@@ -133,5 +133,11 @@ augment class Array {
 		(! $one_based)
 		?? 	Hash.new( $range.map({ $_       , self[$_]   }))
 		!! 	Hash.new( $range.map({ ($_ + 1) , self[$_]   }));
+	}
+}
+
+augment class Seq {
+	method flatten returns Seq:D {
+		gather self.deepmap( *.take )
 	}
 }
