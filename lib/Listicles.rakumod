@@ -1,4 +1,4 @@
-unit module Listicles:ver<1.3.0>:auth<masukomi (masukomi@masukomi.org)>;
+unit module Listicles:ver<1.4.0>:auth<masukomi (masukomi@masukomi.org)>;
 
 =begin pod
 A collection of helper methods to make working with Arrays a little easier.
@@ -137,7 +137,14 @@ augment class Array {
 }
 
 augment class Seq {
+
+	#| Fully, and deeply flattens a list, and returns it as a Seq.
 	method flatten returns Seq:D {
 		gather self.deepmap( *.take )
 	}
+
+	#| Tests if the array is empty
+    method is-empty() returns Bool:D {
+		self.elems == 0;
+    }
 }

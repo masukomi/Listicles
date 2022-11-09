@@ -41,6 +41,9 @@ is(@test_array.includes(4, ducktyped=>True), True, 'should find ducktyped 4');
 # is-empty
 is(@test_array.is-empty(), False);
 is([].is-empty(), True);
+# is-empty Seq version
+is(@nested_seqs.is-empty(), False);
+is(().Seq.is-empty(), True);
 # rest
 is( @test_array.rest(), [2, "4","hi", 3/4] );
 is( [].rest(), [] );

@@ -1,3 +1,7 @@
+## [1.4.0] - 2022-11-09
+### Added
+*  added .is-empty to Seq
+
 ## [1.3.0] - 2022-11-09
 ### Added
 *  added .flatten to Seq
