@@ -1,3 +1,18 @@
+## [1.5.1] - 2023-02-03
+Removed v1.5.0 from fez. This rolls back the 1.5.0 changes
+because they broke the built in .all and .any that I was
+unaware of.
+
+### Removed 
+*  removed .all from Seq, List, and Array
+*  removed .any from Seq, List, and Array
+
+
+## [1.5.0] - 2023-02-03
+### Added
+*  added .all to Seq, List, and Array
+*  added .any to Seq, List, and Array
+
 ## [1.4.0] - 2022-11-09
 ### Added
 *  added .is-empty to Seq
