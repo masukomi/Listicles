@@ -1,4 +1,4 @@
-unit module Listicles:ver<1.5.0>:auth<masukomi (masukomi@masukomi.org)>;
+unit module Listicles:ver<1.4.0>:auth<masukomi (masukomi@masukomi.org)>;
 
 =begin pod
 A collection of helper methods to make working with Arrays a little easier.
@@ -8,20 +8,6 @@ A collection of helper methods to make working with Arrays a little easier.
 use MONKEY-TYPING;
 
 augment class Array {
-
-	#| Returns True if the function passed in returns true for all items.
-	#| Function must take a single paramater and return True or False
-	#| Ex. to see if all numbers are even $my_array.all(-> $x {$x mod 2 == 0})
-	method all(&truthy_function) returns Bool {
-		self.List.all(&truthy_function);
-	}
-
-	#| Returns True if the function passed in returns true for any item.
-	#| Function must take a single paramater and return True or False
-	#| Ex. to see if all numbers are even $my_array.any(-> $x {$x mod 2 == 0})
-	method any(&truthy_function) returns Bool {
-		self.List.any(&truthy_function);
-	}
 
 	#|( Returns the first element of the Array.
 	Throws an exception if the array is empty. Intended to satisfy lisp people.
@@ -151,72 +137,14 @@ augment class Array {
 }
 
 augment class Seq {
-	# Yes, this is copy-pasta
-	# but Seq isn't a subclass of List and List isn't a subclass of Seq
-	# and I dunno of a way to monkeypatch and a role or a parent class.
-	# Also, that just sounds like an even worse idea than monkeypatching
-	# core classes. ;)
-
-	#| Returns True if the function passed in returns true for all items.
-	#| Function must take a single paramater and return True or False
-	#| Ex. to see if all numbers are even $my_seq.all(-> $x {$x mod 2 == 0})
-	method all(&truthy_function) returns Bool {
-		for self -> $element {
-			return False unless &truthy_function($element);
-		}
-		return True;
-	}
-
-	#| Returns True if the function passed in returns true for any item.
-	#| Function must take a single paramater and return True or False
-	#| Ex. to see if all numbers are even $my_seq.any(-> $x {$x mod 2 == 0})
-	method any(&truthy_function) returns Bool {
-		for self -> $element {
-			return True if &truthy_function($element);
-		}
-		return False;
-	}
-	#| Fully, and deeply flattens a list, and returns it as a Seq.
-	method flatten returns Seq:D {
-		gather self.deepmap( *.take )
-	}
-
-	#| Tests if the Seq is empty
-    method is-empty() returns Bool:D {
-		self.elems == 0;
-    }
-
-}
-
-augment class List {
-	#| Returns True if the function passed in returns true for all items.
-	#| Function must take a single paramater and return True or False
-	#| Ex. to see if all numbers are even $my_list.all(-> $x {$x mod 2 == 0})
-	method all(&truthy_function) returns Bool {
-		for self -> $element {
-			return False unless &truthy_function($element);
-		}
-		return True;
-	}
-
-	#| Returns True if the function passed in returns true for any item.
-	#| Function must take a single paramater and return True or False
-	#| Ex. to see if all numbers are even $my_list.any(-> $x {$x mod 2 == 0})
-	method any(&truthy_function) returns Bool {
-		for self -> $element {
-			return True if &truthy_function($element);
-		}
-		return False;
-	}
 
 	#| Fully, and deeply flattens a list, and returns it as a Seq.
 	method flatten returns Seq:D {
 		gather self.deepmap( *.take )
 	}
 
-	#| Tests if the List is empty
+	#| Tests if the array is empty
     method is-empty() returns Bool:D {
 		self.elems == 0;
     }
-
 }
