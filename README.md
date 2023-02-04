@@ -1,5 +1,25 @@
 A collection of helper methods to make working with Arrays a little easier.
 
+### method all-are
+
+```raku
+method all-are(
+    &truthy_function
+) returns Bool
+```
+
+Returns True if the function passed in returns true for all items. Function must take a single paramater and return True or False Ex. to see if all numbers are even $my_array.all-are(-> $x {$x mod 2 == 0})
+
+### method any-are
+
+```raku
+method any-are(
+    &truthy_function
+) returns Bool
+```
+
+Returns True if the function passed in returns true for any item. Function must take a single paramater and return True or False Ex. to see if any numbers are even $my_array.any-are(-> $x {$x mod 2 == 0})
+
 ### method car
 
 ```raku
@@ -93,4 +113,76 @@ method to-hash(
 ```
 
 creates a hash with the stringified index of each element as its key. Set one_based to True to have it start the keys at 1 instead of 0. Example: ["foo", "bar"] -> {"0"=>"foo", "1"=>"bar"}
+
+### method all-are
+
+```raku
+method all-are(
+    &truthy_function
+) returns Bool
+```
+
+Returns True if the function passed in returns true for all items. Function must take a single paramater and return True or False Ex. to see if all numbers are even $my_seq.all-are(-> $x {$x mod 2 == 0})
+
+### method any-are
+
+```raku
+method any-are(
+    &truthy_function
+) returns Bool
+```
+
+Returns True if the function passed in returns true for any item. Function must take a single paramater and return True or False Ex. to see if any numbers are even $my_seq.any-are(-> $x {$x mod 2 == 0})
+
+### method flatten
+
+```raku
+method flatten() returns Seq:D
+```
+
+Fully, and deeply flattens a list, and returns it as a Seq.
+
+### method is-empty
+
+```raku
+method is-empty() returns Bool
+```
+
+Tests if the Seq is empty
+
+### method all-are
+
+```raku
+method all-are(
+    &truthy_function
+) returns Bool
+```
+
+Returns True if the function passed in returns true for all items. Function must take a single paramater and return True or False Ex. to see if all numbers are even $my_list.all-are(-> $x {$x mod 2 == 0})
+
+### method any-are
+
+```raku
+method any-are(
+    &truthy_function
+) returns Bool
+```
+
+Returns True if the function passed in returns true for any item. Function must take a single paramater and return True or False Ex. to see if any numbers are even $my_list.any-are(-> $x {$x mod 2 == 0})
+
+### method flatten
+
+```raku
+method flatten() returns Seq:D
+```
+
+Fully, and deeply flattens a list, and returns it as a Seq.
+
+### method is-empty
+
+```raku
+method is-empty() returns Bool
+```
+
+Tests if the List is empty
 
